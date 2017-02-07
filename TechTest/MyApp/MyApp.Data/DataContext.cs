@@ -8,11 +8,21 @@ namespace MyApp.Data
 {
     public class DataContext
     {
+        // Databas tables
         private List<User> Users { get; set; }
 
 
-
         public DataContext()
+        {
+            // On startup we want to seed the data in
+            Seed();
+        }
+
+
+        /// <summary>
+        /// Seed the default data for the app
+        /// </summary>
+        private void Seed()
         {
             Users = new List<User>
             {
@@ -22,6 +32,7 @@ namespace MyApp.Data
                 new User { Id = 4, Forename = "Graham", Surname = "Clark", IsActive = true }
             };
         }
+
 
 
         public List<TEntity> Set<TEntity>() where TEntity : class
