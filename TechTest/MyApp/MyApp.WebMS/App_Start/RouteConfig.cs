@@ -9,6 +9,9 @@ namespace MyApp.WebMS
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            // Turn on attribute routing in the controllers
+            routes.MapMvcAttributeRoutes();
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

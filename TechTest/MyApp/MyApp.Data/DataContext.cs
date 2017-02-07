@@ -26,10 +26,10 @@ namespace MyApp.Data
         {
             Users = new List<User>
             {
-                new User { Id = 1, Forename = "Grant", Surname = "Cooper", IsActive = true },
-                new User { Id = 2, Forename = "Tom", Surname = "Gathercole", IsActive = true },
-                new User { Id = 3, Forename = "Mark", Surname = "Edmondson", IsActive = true },
-                new User { Id = 4, Forename = "Graham", Surname = "Clark", IsActive = true }
+                new User { Id = 1, Forename = "Grant", Surname = "Cooper", Email = "grant.cooper@example.com", IsActive = true },
+                new User { Id = 2, Forename = "Tom", Surname = "Gathercole", Email = "tom.gathercole@example.com", IsActive = true },
+                new User { Id = 3, Forename = "Mark", Surname = "Edmondson", Email = "mark.edmondson@example.com", IsActive = true },
+                new User { Id = 4, Forename = "Graham", Surname = "Clark", Email = "graham.clark@example.com", IsActive = true }
             };
         }
 

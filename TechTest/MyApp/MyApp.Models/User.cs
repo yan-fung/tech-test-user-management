@@ -8,6 +8,8 @@ namespace MyApp.Models
 
         public string Surname { get; set; }
 
+        public string Email { get; set; }
+
         public bool IsActive { get; set; }
     }
 }
