@@ -1,0 +1,35 @@
+<h2>Add User</h2>
+
+<form asp-controller="Users" asp-action="Create" method="post">
+    <div class="form-group">
+        <label for="Forename">Forename:</label>
+        <input type="text" class="form-control" id="Forename" name="Forename">
+    </div>
+
+    <div class="form-group">
+        <label for="Surname">Surname:</label>
+        <input type="text" class="form-control" id="Surname" name="Surname">
+    </div>
+
+    <div class="form-group">
+        <label for="DateOfBirth">Date of Birth:</label>
+        <input type="date" class="form-control" id="DateOfBirth" name="DateOfBirth">
+    </div>
+
+    <div class="form-group">
+        <label for="Email">Email:</label>
+        <input type="email" class="form-control" id="Email" name="Email">
+    </div>
+
+    <div class="form-group">
+        <label for="IsActive">Is Active:</label>
+        <select class="form-control" id="IsActive" name="IsActive">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+
+</form>
