@@ -2,6 +2,7 @@
 using UserManagement.Services.Domain.Interfaces;
 using UserManagement.Web.Models.Users;
 using UserManagement.Models;
+using UserManagement.Data;
 
 namespace UserManagement.WebMS.Controllers;
 
@@ -9,23 +10,29 @@ namespace UserManagement.WebMS.Controllers;
 public class UsersController : Controller
 {
     private readonly IUserService _userService;
-    public UsersController(IUserService userService) => _userService = userService;
+    private readonly IDataContext _dataContext;
 
-    [HttpGet]
+    public UsersController(IUserService userService, IDataContext dataContext)
+    {
+        _userService = userService;
+        _dataContext = dataContext;
+    }
+
+    [HttpGet("list")]
     public ViewResult List(bool? showActive = null)
     {
-        /// Get the list of users based on the showActive parameter
+        // Get the list of users based on the showActive parameter
         IEnumerable<User> users;
 
         if (showActive.HasValue)
         {
             users = showActive.Value
-                ? _userService.FilterByActive(true)  /// Fetch active users
-                : _userService.FilterByActive(false); /// Fetch non-active users
+                ? _userService.FilterByActive(true)  // Fetch active users
+                : _userService.FilterByActive(false); // Fetch non-active users
         }
         else
         {
-            /// If showActive is not specified, get all users
+            // If showActive is not specified, get all users
             users = _userService.GetAll();
         }
 
@@ -45,5 +52,24 @@ public class UsersController : Controller
         };
 
         return View(model);
+    }
+
+    [HttpGet("add")]
+    public IActionResult AddUser()
+    {
+        // Return a view that displays a form for adding a new user
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Create(User user)
+    {
+        if (ModelState.IsValid)
+        {
+            // Add the user to the data context
+            _dataContext.Create(user);
+            return RedirectToAction("List");
+        }
+        return View(user);
     }
 }
