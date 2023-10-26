@@ -72,4 +72,32 @@ public class UsersController : Controller
         }
         return View(user);
     }
+
+    [HttpGet("delete/{id}")] // Use a route parameter to specify the user ID
+    public IActionResult Delete(int id)
+    {
+        var user = _dataContext.GetAll<User>().FirstOrDefault(u => u.Id == id);
+
+        if (user == null)
+        {
+            return NotFound(); // Handle user not found
+        }
+
+        return View("DeleteUser", user);
+    }
+
+    [HttpPost("delete/{id}")] // Use a route parameter for the user ID
+    public IActionResult DeleteConfirmed(int id)
+    {
+        var user = _dataContext.GetAll<User>().FirstOrDefault(u => u.Id == id);
+
+        if (user == null)
+        {
+            return NotFound(); // Handle user not found
+        }
+
+        _dataContext.Delete(user);
+
+        return RedirectToAction("List"); // Redirect to the list page after deletion
+    }
 }
