@@ -136,4 +136,16 @@ public class UsersController : Controller
         return RedirectToAction("List");
     }
 
+    [HttpGet("view/{id}")] // Use a route parameter for the user ID
+    public IActionResult View(int id)
+    {
+        var user = _dataContext.GetAll<User>().FirstOrDefault(u => u.Id == id);
+
+        if (user == null)
+        {
+            return NotFound(); // Handle user not found
+        }
+
+        return View("ViewUser", user);
+    }
 }
