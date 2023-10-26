@@ -1,0 +1,33 @@
+@model UserManagement.Models.User
+
+<h2>User Information</h2>
+
+<form asp-action="View" asp-route-id="@Model.Id" method="get">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Forename">Forename</label>
+        <span class="form-control">@Model.Forename</span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Surname">Surname</label>
+        <span class="form-control">@Model.Surname</span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <span class="form-control">@Model.Email</span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DateOfBirth">Date of Birth</label>
+        <span class="form-control">@Model.DateOfBirth.ToShortDateString()</span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IsActive">Is Active</label>
+        <span class="form-control">@Model.IsActive</span>
+    </div>
+    <a asp-action="List" class="btn btn-secondary">Back to List</a>
+</form>
