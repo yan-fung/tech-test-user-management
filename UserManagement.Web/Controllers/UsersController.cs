@@ -70,7 +70,7 @@ public class UsersController : Controller
             _dataContext.Create(user);
             return RedirectToAction("List");
         }
-        return View(user);
+        return View("AddUser", user); // Return to the AddUser view with validation errors
     }
 
     [HttpGet("delete/{id}")] // Use a route parameter to specify the user ID
@@ -123,6 +123,12 @@ public class UsersController : Controller
         if (user == null)
         {
             return NotFound();
+        }
+
+        // Check if the model is valid, and if not, return to the edit view with validation errors
+        if (!ModelState.IsValid)
+        {
+            return View("EditUser", editedUser);
         }
 
         user.Forename = editedUser.Forename;
