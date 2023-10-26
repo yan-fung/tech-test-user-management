@@ -100,4 +100,40 @@ public class UsersController : Controller
 
         return RedirectToAction("List"); // Redirect to the list page after deletion
     }
+
+    [HttpGet("edit/{id}")] // Use a route parameter for the user ID
+    public IActionResult Edit(int id)
+    {
+        var user = _dataContext.GetAll<User>().FirstOrDefault(u => u.Id == id);
+
+        if (user == null)
+        {
+            return NotFound(); // Handle user not found
+        }
+
+        return View("EditUser", user);
+    }
+
+    [HttpPost("edit/{id}")] // Use a route parameter for the user ID
+    public IActionResult EditConfirmed(int id, User editedUser)
+    {
+        // Find the user to edit by ID
+        var user = _dataContext.GetAll<User>().FirstOrDefault(u => u.Id == id);
+
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        user.Forename = editedUser.Forename;
+        user.Surname = editedUser.Surname;
+        user.Email = editedUser.Email;
+        user.DateOfBirth = editedUser.DateOfBirth;
+        user.IsActive = editedUser.IsActive;
+
+        _dataContext.Update(user);
+
+        return RedirectToAction("List");
+    }
+
 }
